@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Manager</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+        }
+
+        h1 {
+            margin-top: 30px;
+            font-size: 34px;
+            color: #58a6ff;
+            text-shadow: 0 0 8px #58a6ff60;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 18px;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 30px;
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        table th {
+            background: #161b22;
+            padding: 12px;
+            font-size: 16px;
+            color: #79c0ff;
+            border-bottom: 1px solid #21262d;
+        }
+
+        table td {
+            padding: 12px;
+            background: #0d1117;
+            border-bottom: 1px solid #21262d;
+            color: #c9d1d9;
+        }
+
+        table tr:hover td {
+            background: #161b22;
+        }
+
+        input,
+        select {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #30363d;
+            background: #0d1117;
+            color: #e6edf3;
+            border-radius: 8px;
+            margin: 5px 0;
+            transition: 0.2s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #58a6ff;
+            box-shadow: 0 0 6px #58a6ff88;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 18px;
+            background: #238636;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #2ea043;
+            transform: scale(1.05);
+        }
+
+        .delete-btn {
+            background: #da3633;
+        }
+
+        .delete-btn:hover {
+            background: #f85149;
+        }
+
+        .edit-btn {
+            background: #8957e5;
+        }
+
+        .edit-btn:hover {
+            background: #a371f7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Student Management System</h1>
+
+        <div class="card">
+            <h2 style="color:#58a6ff;">Add New Student</h2>
+
+
+
+            <form action="/add-student" method="post">
+                <table>
+                    <tr>
+                        <td>Id</td>
+                        <td><input type="number" name="id" required></td>
+                    </tr>
+                    <tr>
+                        <td>Firstname</td>
+                        <td><input type="text" name="firstname" required></td>
+                    </tr>
+                    <tr>
+                        <td>Lastname</td>
+                        <td><input type="text" name="lastname" required></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="email" name="email" required></td>
+                    </tr>
+                    <tr>
+                        <td>Age</td>
+                        <td><input type="number" name="age" required></td>
+                    </tr>
+                    <tr>
+                        <td>Course</td>
+                        <td>
+                            <select name="course" required>
+                                <option value="">Select Your Course</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Electrical Engineering">Electrical Engineering</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td><button type="submit">Add Student</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2 style="color:#58a6ff;">Student List</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Course</th>
+                    <th colspan="2">Action</th>
+                </tr>
+
+                <% students.forEach((stu)=>{ %>
+                    <tr>
+                        <td>
+                            <%= stu.id %>
+                        </td>
+                        <td>
+                            <%= stu.firstname %>
+                        </td>
+                        <td>
+                            <%= stu.lastname %>
+                        </td>
+                        <td>
+                            <%= stu.email %>
+                        </td>
+                        <td>
+                            <%= stu.age %>
+                        </td>
+                        <td>
+                            <%= stu.course %>
+                        </td>
+
+                        <td>
+                            <a href="/delete-student/<%= stu.id %>">
+                                <button class="delete-btn">Delete</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/edit-student/<%= stu.id %>">
+                                <button class="edit-btn">Edit</button>
+                            </a>
+                        </td>
+                    </tr>
+                    <% }) %>
+
+            </table>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
