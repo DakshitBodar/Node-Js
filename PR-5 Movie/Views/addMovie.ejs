@@ -1,0 +1,76 @@
+<%- include('header') %>
+
+    <div class="add-movie-wrapper">
+        <div class="add-movie-card">
+            <h2> Add New Movie</h2>
+
+            <form action="/add-movie" method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label>Movie Name</label>
+                    <input type="text" name="name" placeholder="Enter movie name" required maxlength="50"
+                        oninput="this.value=this.value.slice(0,50)">
+                </div>
+
+                <div class="form-group">
+                    <label>Director</label>
+                    <input type="text" name="director" placeholder="Director name" maxlength="40"
+                        oninput="this.value=this.value.slice(0,40)">
+                </div>
+
+                <div class="form-group">
+                    <label>Genre</label>
+                    <select name="genre" class="genre-select" required>
+                        <option value="" disabled selected>Select Genre</option>
+                        <option value="Action">Action</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="Animation">Animation</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Release Year</label>
+                    <input type="number" name="year" placeholder="2026" min="1900" max="2026"
+                        oninput="if(this.value.length>4)this.value=this.value.slice(0,4)">
+                </div>
+
+                <div class="form-group">
+                    <label>Rating</label>
+                    <input type="number" name="rating" placeholder="8.5" step="0.1" min="0" max="10"
+                        oninput="if(this.value>10)this.value=10">
+                </div>
+
+                <div class="form-group">
+                    <label>Poster Image</label>
+                    <input type="file" name="image" accept="image/png, image/jpeg, image/jpg"
+                        onchange="previewImage(event)">
+                </div>
+
+                <div class="image-preview">
+                    <img id="preview">
+                </div>
+
+                <button type="submit" class="submit-btn">Add Movie</button>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const img = document.getElementById('preview');
+            img.src = URL.createObjectURL(event.target.files[0]);
+            img.style.display = "block";
+        }
+    </script>
+
+    </div>
+    </body>
+
+    </html>
